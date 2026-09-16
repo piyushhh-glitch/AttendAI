@@ -6,19 +6,25 @@ from src.ui.base_layout import style_base_layout
 def home_screen():
     style_background_home()
     style_base_layout()
-    st.title("Home Screen")
+   
 
     header_home()
     col1,col2=st.columns(2)
 
     with col1:
-        if st.button('Student Portal'):
-            st.session_state['login_type']='student'
-            st.rerun()
-
-    with col2:
+        st.header("I'm Teacher")
+        st.image("https://i.ibb.co/CsmQQV6X/mascot-prof.png",width=120)
         if st.button('Teacher Portal'):
             st.session_state['login_type']='teacher'
             st.rerun()
+        
+    with col2:
+        st.header("I'm Student")
+        st.image("https://i.ibb.co/844D9Lrt/mascot-student.png",width=120)
+        if st.button('Student Portal'):
+            st.session_state['login_type']='student'
+            st.rerun()
+        
+
 
 
