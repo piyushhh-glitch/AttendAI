@@ -21,7 +21,7 @@ def teacher_screen_login():
         header_dashboard()
     with col2:
         if st.button("Go back to Home", type="secondary", key='loginbackbtn',shortcut="control+backspace"):
-            st.session_state['login_type']=None
+            st.session_state['teacher_login_type']=None
             st.rerun()
         
 
@@ -43,6 +43,7 @@ def teacher_screen_login():
     with btnc2:
         if st.button("Register Instead",icon=":material/passkey:",type="primary",width="stretch"):
             st.session_state.teacher_login_type="register"
+            st.rerun()
 
     footer_dashboard()
 
@@ -55,8 +56,8 @@ def teacher_screen_register():
     with col1:
         header_dashboard()
     with col2:
-        if st.button("Go back to Home", type="secondary", key='loginbackbtn',shortcut="control+backspace"):
-            st.session_state['login_type']=None
+        if st.button("Go back to Home", type="secondary", key='registerbackbtn',shortcut="control+backspace"):
+            st.session_state['teacher_login_type']=None
             st.rerun()
 
     st.header("Register Your Teacher Profile")
@@ -82,5 +83,6 @@ def teacher_screen_register():
     with btnc2:
         if st.button("Login Instead",icon=":material/passkey:",type="primary",width="stretch"):
             st.session_state.teacher_login_type="login"
+            st.rerun()
 
     footer_dashboard()
