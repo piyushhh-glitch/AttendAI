@@ -48,6 +48,7 @@ def teacher_screen_login():
     with col2:
         if st.button("Go back to Home", type="secondary", key='loginbackbtn',shortcut="control+backspace"):
             st.session_state['teacher_login_type']=None
+            st.session_state['login_type']=None
             st.rerun()
         
 
@@ -109,6 +110,7 @@ def teacher_screen_register():
     with col2:
         if st.button("Go back to Home", type="secondary", key='registerbackbtn',shortcut="control+backspace"):
             st.session_state['teacher_login_type']=None
+            st.session_state['login_type']=None
             st.rerun()
 
     st.header("Register Your Teacher Profile")

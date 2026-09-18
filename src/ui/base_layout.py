@@ -70,7 +70,7 @@ def style_base_layout():
                 font-size: 2rem !important;
                 line-height:0.9 !important;
                 margin-bottom:0rem !important;
-                color: #1F1F1F !important;
+                # color: #1F1F1F !important;
             }
                 
             h3, h4, p {
