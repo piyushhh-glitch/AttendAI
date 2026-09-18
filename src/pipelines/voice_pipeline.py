@@ -9,7 +9,7 @@ import streamlit as st
 def load_voice_encoder():
     return VoiceEncoder()
 
-def get_voice_embeddings(audio_bytes):
+def get_voice_embedding(audio_bytes):
     try:
         encoder=load_voice_encoder()
 
@@ -21,6 +21,7 @@ def get_voice_embeddings(audio_bytes):
     except Exception as e:
         st.error(f"Voice recognization error:{e}")
         return None
+    
 
 def identify_speaker(new_embedding,candidates_dict,threshold=0.65):
     if new_embedding is None or not candidates_dict:
@@ -40,6 +41,7 @@ def identify_speaker(new_embedding,candidates_dict,threshold=0.65):
         return best_sid,best_score
 
     return None,best_score
+
 
 def process_bulk_audio(audio_bytes,candidates_dict,threshold=0.65):
 
