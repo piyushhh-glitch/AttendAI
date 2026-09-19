@@ -7,6 +7,7 @@ from src.database.db import create_teacher
 from src.database.db import teacher_login,get_teacher_subjects
 from src.components.dialog_create_subject import create_subject_dialog
 from src.components.subject_card import subject_card
+from src.components.dialog_share_subject import share_subject_dialog
 
 def teacher_screen():
     style_background_dashboard()
