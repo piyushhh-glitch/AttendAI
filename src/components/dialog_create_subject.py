@@ -9,7 +9,7 @@ def create_subject_dialog(teacher_id):
     sub_name=st.text_input("Subject Name",placeholder="Introduction To Computer Science")
     sub_section=st.text_input("Section",placeholder="A")
 
-    if st.button("Create Subject Now",type='primary',width='strech'):
+    if st.button("Create Subject Now",type='primary',width='stretch'):
         try:
             if sub_id and sub_name and sub_section:
                 create_subject(sub_id,sub_name,sub_section,teacher_id)
