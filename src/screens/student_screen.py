@@ -8,9 +8,50 @@ from src.database.db import get_all_students,create_student
 import numpy as np
 from PIL import Image
 import time
+from src.database.db import enroll_student_to_subject,get_student_subjects,get_student_attendance
 
 def student_dashboard():
-    st.header("Dashboard Here")
+    student_data=st.session_state.student_data
+    student_id=student_data['student_id']
+
+    col1,col2=st.columns(2,vertical_alignment='center',gap='xxlarge')
+
+    with col1:
+        header_dashboard()
+    with col2:
+        st.subheader(f""" Welcome {student_data['name']} """)
+        if st.button("Go back to Home", type="secondary", key='loginbackbtn',shortcut="control+backspace"):
+            st.session_state['is_logged_in']=False
+            del st.session_state.student_data
+            st.rerun()
+
+    st.space()
+
+    c1,c2=st.columns(2)
+
+    with c1:
+        st.header("Your Enrolled Subjects")
+    with c2:
+        if st.button("Enroll in subject",type='primary',width='stretch'):
+            enroll_dialog()
+
+    st.divider()
+
+    with st.spinner("Loading your subjects..."):
+        subjects=get_student_subjects(student_id)
+        logs=get_student_attendance(student_id)
+
+    stats_map={
+
+    }
+
+    for log in logs:
+        sid=log['subject_id']
+
+        if sid not in stats_map:
+            stats_map[sid]={'total':0,'attended':0}
+    footer_dashboard()
+
 
 def student_screen():
     style_background_dashboard()
