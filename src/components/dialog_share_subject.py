@@ -5,7 +5,7 @@ import io
 @st.dialog("Share Subject Link")
 def share_subject_dialog(subject_name,subject_code):
     domain_url="http://localhost:8501"
-    join_url=f"{domain_url}?join_code={subject_code}"
+    join_url=f"{domain_url}?join-code={subject_code}"
 
     st.header("Scan to Join")
 
