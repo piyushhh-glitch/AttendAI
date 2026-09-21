@@ -15,6 +15,7 @@ from src.components.dialog_add_photos import add_photos_dialog
 import numpy as np
 import pandas as pd 
 from src.components.dialog_attendance_results import attendance_result_dialog
+from src.components.dialog_voice_attendance import voice_attendance_dialog
 
 def teacher_screen():
     style_background_dashboard()
@@ -175,7 +176,7 @@ def teacher_tab_take_attendance():
 
     with c3:
         if st.button('Use Voice Attendance',type='primary',width='stretch',icon=':material/mic:'):
-            voice_attendance_dialog(selected)
+            voice_attendance_dialog(selected_subject_id)
 
 
 
