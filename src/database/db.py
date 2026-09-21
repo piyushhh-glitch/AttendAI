@@ -82,5 +82,5 @@ def get_student_attendance(student_id):
    
 
 def create_attendance(logs):
-    response=supabase.table('attendance_logs').insert(logs).execute()
+    response=supabase.table('attendance').insert(logs).execute()
     return response.data

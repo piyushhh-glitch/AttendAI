@@ -20,4 +20,4 @@ def attendance_result_dialog(df,logs):
                 st.session_state.attendance_images=[]
                 st.rerun()
             except Exception as e:
-                st.error("Sync failed!")
+                st.exception(e)
