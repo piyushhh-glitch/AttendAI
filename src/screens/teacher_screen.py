@@ -252,6 +252,15 @@ def teacher_tab_attendance_records():
 
     df=pd.DataFrame(data)
 
+    summary = (
+    df.groupby(['ts_group', 'Time', 'Subject', 'Subject Code'])
+      .agg(
+          Present_Count=('is_present', 'sum'),
+          Total_Count=('is_present', 'count')
+      )
+      .reset_index()
+    )
+
 
     summary['Attendance Stats'] = (
         "✅ " + summary['Present_Count'].astype(str) + " /"
