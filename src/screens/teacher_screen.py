@@ -16,6 +16,8 @@ import numpy as np
 import pandas as pd 
 from src.components.dialog_attendance_results import attendance_result_dialog
 from src.components.dialog_voice_attendance import voice_attendance_dialog
+from src.database.db import get_attendance_for_teacher
+import pandas as pd
 
 def teacher_screen():
     style_background_dashboard()
@@ -186,9 +188,6 @@ def teacher_tab_take_attendance():
 
 
 
-
-
-
 def teacher_tab_manage_subjects():
     teacher_id=st.session_state.teacher_data['teacher_id']
     col1,col2=st.columns(2)
@@ -222,9 +221,52 @@ def teacher_tab_manage_subjects():
     else:
         st.info("NO SUBJECTS FOUND. CREATE ONE ABOVE")
 
+
+
+
+
 def teacher_tab_attendance_records():
     st.header('Attendance Records')
+
+    teacher_id=st.session_state.teacher_data['teacher_id']
+
+    records=get_attendance_for_teacher(teacher_id)
+
+    if not records:
+        return 
     
+    data=[]
+
+    for r in records:
+        ts=r.get('timestamp')
+
+        data.append(
+            {
+                "ts_group":ts.split(".")[0] if ts else None,
+                "Time":datetime.fromisoformat(ts).strftime("%Y-%m-%d &I:%M %p") if ts else "N.A",
+                "Subject":r['subjects']['name'],
+                "Subject Code":r['subjects']['subject_code'],
+                "is_present":bool(r.get('is_present',False))
+            }
+        )
+
+    df=pd.DataFrame(data)
+
+
+    summary['Attendance Stats'] = (
+        "✅ " + summary['Present_Count'].astype(str) + " /"
+        + summary['Total_Count'].astype(str) + ' Students'
+    )
+
+    display_df = ( summary.sort_values(by='ts_group' ,ascending=False)
+                  [['Time', 'Subject', 'Subject Code', 'Attendance Stats']]
+                  )
+    
+    st.dataframe(display_df, width='stretch', hide_index=True)
+
+    
+
+
 
 
 def login_teacher(teacher_username,teacher_password):

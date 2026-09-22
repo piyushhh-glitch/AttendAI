@@ -13,6 +13,8 @@ from src.database.db import enroll_student_to_subject,get_student_subjects,get_s
 from src.components.enroll_dialog import enroll_dialog
 from src.components.dialog_auto_enroll import auto_enroll_dialog
 
+
+
 def student_dashboard():
     student_data=st.session_state.student_data
     student_id=student_data['student_id']
