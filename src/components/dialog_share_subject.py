@@ -4,7 +4,7 @@ import io
 
 @st.dialog("Share Subject Link")
 def share_subject_dialog(subject_name,subject_code):
-    domain_url="http://localhost:8501"
+    domain_url="attendai.streamlit.app"
     join_url=f"{domain_url}?join-code={subject_code}"
 
     st.header("Scan to Join")
