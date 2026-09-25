@@ -61,6 +61,10 @@ def style_base_layout():
                 padding-top:1.5rem !important;    
             }
 
+            .stApp {
+                color:#1F1F1F !important;
+            }
+
             h1 {
                 font-family: 'Climate Crisis', sans-serif !important;
                 font-size: 3.5rem !important;
