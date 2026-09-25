@@ -80,7 +80,7 @@ def style_base_layout():
                 
             h3, h4, p {
                 font-family: 'Outfit', sans-serif !important;  
-                color: #1F1F1F !important;
+                
             }
                 
 
