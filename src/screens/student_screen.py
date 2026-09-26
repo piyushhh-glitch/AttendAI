@@ -61,27 +61,46 @@ def student_dashboard():
         if log.get('is_present'):
             stats_map[sid]['attended']+=1
 
-    cols=st.columns(2)
-    for i,sub_node in enumerate(subjects):
-        sub=sub_node['subjects']
-        sid=sub['subject_id']
+    cols = st.columns(2)
 
-        stats=stats_map.get(sid,{'total':0,'attended':0})
-        def unenroll_button():
-            if st.button("Unenroll from this course",type='tertiary',width='stretch',icon=':material/delete_forever:'):
-                unenroll_student_to_subject(student_id,sid)
-                st.toast(f"Unenrolled from {sub['name']} successfully!")
-                st.rerun()
-        with cols[i%2]:
+
+    def unenroll_button(subject_id, subject_name):
+        if st.button(
+            "Unenroll from this course",
+            type="tertiary",
+            width="stretch",
+            icon=":material/delete_forever:",
+            key=f"unenroll_{subject_id}"
+        ):
+            unenroll_student_to_subject(student_id, subject_id)
+
+            st.toast(f"Unenrolled from {subject_name} successfully!")
+
+            st.rerun()
+
+
+    for i, sub_node in enumerate(subjects):
+
+        sub = sub_node['subjects']
+        sid = sub['subject_id']
+
+        stats = stats_map.get(
+            sid,
+            {"total": 0, "attended": 0}
+        )
+
+        with cols[i % 2]:
+
             subject_card(
                 name=sub['name'],
                 code=sub['subject_code'],
                 section=sub['section'],
                 stats=[
-                    ('📅','Total',stats['total']),
-                    ('✅','Attended',stats['attended'])
+                    ('📅', 'Total', stats['total']),
+                    ('✅', 'Attended', stats['attended']),
                 ],
-                footer_callback=unenroll_button
+                footer_callback=lambda sid=sid, name=sub['name']:
+                    unenroll_button(sid, name)
             )
 
     footer_dashboard()
